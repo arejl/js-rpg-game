@@ -12,9 +12,10 @@ class Character {
       this.healthPoints -= damageReceived;
       if (this.healthPoints <= 0) {
         this.state = "loser"
+        console.log(`${this.constructor.name} a perdu !`)
         }
     }
-    else {console.log("Vous n'avez plus de PV, vous êtes hors jeu !")}
+    else {console.log(`${this.constructor.name} est hors jeu !`)}
   }
 
   dealDamage = (enemy, damageInflicted) => {
@@ -23,7 +24,6 @@ class Character {
       console.log(`${this.constructor.name} attaque ${enemy.constructor.name}`)
       enemy.takeDamage(damageInflicted);
       if (enemy.healthPoints <= 0) {
-        console.log(`${enemy.constructor.name} a perdu !`)
         this.manaPoints += 20;
       }
     }
@@ -37,10 +37,13 @@ class Fighter extends Character {
     this.activatedFighter = activatedFighter;
   }
   darkVision = (enemy) => {
-    this.manaPoints -= 20;
-    this.dealDamage(enemy, 5);
-    this.activatedFighter = 1;
-    //The character receives 2 dmg points less for this turn
+    if (this.manaPoints >= 20)
+      { this.manaPoints -= 20;
+      this.dealDamage(enemy, 5);
+      this.activatedFighter = 1;
+      //The character receives 2 dmg points less per attack for this turn
+    }
+    else {console.log("Vous n'avez pas assez de points de mana")}
   }
 }
 
@@ -49,9 +52,12 @@ class Paladin extends Character {
       super(healthPoints, damagePoints, manaPoints, state);
   }
   healingLighting = (enemy) => {
-    this.manaPoints -= 40;
-    this.healthPoints += 5;
-    this.dealDamage(enemy, 4);
+    if(this.manaPoints >=40)
+      {this.manaPoints -= 40;
+      this.healthPoints += 5;
+      this.dealDamage(enemy, 4);
+    }
+    else {console.log("Vous n'avez pas assez de points de mana")}
   }
 }
 
@@ -60,8 +66,11 @@ class Monk extends Character {
       super(healthPoints, damagePoints, manaPoints, state);
   }
   heal = () => {
-    this.manaPoints -= 25;
-    this.healthPoints += 8;
+    if(this.manaPoints >=25)
+      {this.manaPoints -= 25;
+      this.healthPoints += 8;
+    }
+    else {console.log("Vous n'avez pas assez de points de mana")}
   }
 }
 
@@ -81,21 +90,15 @@ class Assassin extends Character {
     this.activatedAssassin = activatedAssassin;
   }
   shadowHit = (enemy) => {
+    if(this.manaPoints>=20)
+    {//The character will only attack next round.
+    //The character will not take any damage next round.
     this.manaPoints -= 20;
-    this.activatedAssassin = 1;
-    //The character only will attack next round?
     this.dealDamage(enemy, 7)
     if (enemy.state == "playing") {
       this.healthPoints -= 7;
+      }
     }
-    //The character will not take any damage next round.
+    else {console.log("Vous n'avez pas assez de points de mana")}
   }
 }
-
-const Grace = new Fighter();
-const Ulder = new Paladin();
-const Moana = new Monk();
-const Draven = new Berzerker();
-const Carl = new Assassin();
-
-const Players = [Grace, Ulder, Moana, Draven, Carl]
