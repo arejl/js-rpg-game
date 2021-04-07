@@ -20,8 +20,10 @@ class Character {
   dealDamage = (enemy, damageInflicted) => {
     if (enemy.state == "playing")
     {
+      console.log(`${this.constructor.name} attaque ${enemy.constructor.name}`)
       enemy.takeDamage(damageInflicted);
       if (enemy.healthPoints <= 0) {
+        console.log(`${enemy.constructor.name} a perdu !`)
         this.manaPoints += 20;
       }
     }
@@ -30,13 +32,14 @@ class Character {
 }
 
 class Fighter extends Character {
-  constructor(healthPoints = 12, damagePoints = 4, manaPoints = 40, state) {
-      super(healthPoints, damagePoints, manaPoints, state);
+  constructor(healthPoints = 12, damagePoints = 4, manaPoints = 40, state, activatedFighter = 0) {
+    super(healthPoints, damagePoints, manaPoints, state);
+    this.activatedFighter = activatedFighter;
   }
   darkVision = (enemy) => {
     this.manaPoints -= 20;
-    this.dealDamage(enemy, 5)
-    // this.takeDamage(enemy.damagePoints-2)
+    this.dealDamage(enemy, 5);
+    this.activatedFighter = 1;
     //The character receives 2 dmg points less for this turn
   }
 }
@@ -48,7 +51,7 @@ class Paladin extends Character {
   healingLighting = (enemy) => {
     this.manaPoints -= 40;
     this.healthPoints += 5;
-    this.dealDamage(enemy, 4)
+    this.dealDamage(enemy, 4);
   }
 }
 
@@ -73,11 +76,13 @@ class Berzerker extends Character {
 }
 
 class Assassin extends Character {
-  constructor(healthPoints = 6, damagePoints = 6, manaPoints = 20, state) {
-      super(healthPoints, damagePoints, manaPoints, state);
+  constructor(healthPoints = 6, damagePoints = 6, manaPoints = 20, state, activatedAssassin = 0) {
+    super(healthPoints, damagePoints, manaPoints, state);
+    this.activatedAssassin = activatedAssassin;
   }
   shadowHit = (enemy) => {
     this.manaPoints -= 20;
+    this.activatedAssassin = 1;
     //The character only will attack next round?
     this.dealDamage(enemy, 7)
     if (enemy.state == "playing") {
