@@ -12,7 +12,7 @@ class Game {
   }
 
   newGame = () => {
-    console.log("Bienvenue dans le Donjon de la Mort 💀");
+    console.log("💀💀💀 Bienvenue dans le Donjon de la Mort 💀💀💀");
     console.log("\n");
     this.choosePlayableCharacter();
     while (this.turnsLeft > 0 && Players.filter(player => player.state == "playing").length > 1) {
@@ -36,8 +36,14 @@ class Game {
       console.log(player.description);
     });
     let characterChoice = prompt("Indiquez le numéro du personnage que vous souhaitez incarner pour cette partie :");
+    
+    while (typeof(Players[Number(characterChoice)-1]) == "undefined") {
+      alert("Choisissez un joueur valide");
+      characterChoice = prompt("Indiquez le numéro du personnage que vous souhaitez incarner pour cette partie :");
+    }
     Players[characterChoice - 1].humanPlayer = true;
     console.log(`Vous serez donc un ${Players[characterChoice - 1].constructor.name}.`);
     console.log("\n Le combat va commencer. Bonne chance à vous ! \n\n");
+
   }
 }
