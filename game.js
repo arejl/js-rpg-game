@@ -41,6 +41,9 @@ class Game {
       characterChoice = prompt("Indique le numéro du personnage que tu souhaites incarner pour cette partie :");
     }
     Players[Number(characterChoice) - 1].humanPlayer = true;
-    Players[Number(characterChoice) - 1].name = prompt("Comment t'appelles-tu ?")
+    console.log(`Tu seras donc un ${Players[characterChoice - 1].constructor.name}.`);
+    Players[Number(characterChoice) - 1].name = prompt("Comment t'appelles-tu ?");
+    console.log("\n Le combat va commencer. Bonne chance à toi ! \n\n");
+
   }
 }
