@@ -168,19 +168,13 @@ class Turn {
   }
 
   roundGameplay = () => {
-     Players.forEach(player => {
-       if (player.state == "playing" && player.humanPlayer == true) {
-       this.chooseAttack(player) ;
-       };
-     });
-
      let sleep =  (ms) => {
        var now = new Date().getTime();
        while(new Date().getTime() < now + ms){ }
      };
 
      Players.forEach((player) => {
-       if (player.state == "playing" && player.humanPlayer == false) {
+       if (player.state == "playing") {
          this.chooseAttack(player);
          sleep(1000);
         };
@@ -189,5 +183,4 @@ class Turn {
      Players.filter(player => player.constructor.name == "Fighter").map(player => player.activatedFighter = 0);
      Players.filter(player => player.constructor.name == "Assassin").map(player => player.activatedAssassin -= 1);
    }
-
 }
