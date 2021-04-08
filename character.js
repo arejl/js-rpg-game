@@ -1,9 +1,11 @@
 class Character {
-  constructor(healthPoints, damagePoints, manaPoints, state = "playing") {
+  constructor(healthPoints, damagePoints, manaPoints, description, state = "playing", humanPlayer = false) {
       this.healthPoints = healthPoints;
       this.damagePoints = damagePoints;
       this.manaPoints = manaPoints;
+      this.description = description;
       this.state = state;
+      this.humanPlayer = humanPlayer;
   }
 
   takeDamage = (damageReceived) => {
@@ -32,9 +34,10 @@ class Character {
 }
 
 class Fighter extends Character {
-  constructor(healthPoints = 12, damagePoints = 4, manaPoints = 40, state, activatedFighter = 0) {
-    super(healthPoints, damagePoints, manaPoints, state);
+  constructor(healthPoints = 12, damagePoints = 4, manaPoints = 40, state, activatedFighter = 0, humanPlayer) {
+    super(healthPoints, damagePoints, manaPoints, state, humanPlayer);
     this.activatedFighter = activatedFighter;
+    this.description = "Le Fighter est un combattant équilibré sous tous les bords."
   }
   darkVision = (enemy) => {
     if (this.manaPoints >= 20)
@@ -48,8 +51,9 @@ class Fighter extends Character {
 }
 
 class Paladin extends Character {
-  constructor(healthPoints = 16, damagePoints = 3, manaPoints = 200, state) {
-      super(healthPoints, damagePoints, manaPoints, state);
+  constructor(healthPoints = 16, damagePoints = 3, manaPoints = 200, description, state, humanPlayer) {
+      super(healthPoints, damagePoints, manaPoints, state, humanPlayer);
+      this.description = "Le Paladin est un chevalier puissant et défensif."
   }
   healingLighting = (enemy) => {
     if(this.manaPoints >=40)
@@ -62,8 +66,9 @@ class Paladin extends Character {
 }
 
 class Monk extends Character {
-  constructor(healthPoints = 8, damagePoints = 2, manaPoints = 200, state) {
-      super(healthPoints, damagePoints, manaPoints, state);
+  constructor(healthPoints = 8, damagePoints = 2, manaPoints = 200, description, state, humanPlayer) {
+      super(healthPoints, damagePoints, manaPoints, state, humanPlayer);
+      this.description = "Le Monk est un prêtre qui peut se guérir."
   }
   heal = () => {
     if(this.manaPoints >=25)
@@ -75,8 +80,9 @@ class Monk extends Character {
 }
 
 class Berzerker extends Character {
-  constructor(healthPoints = 8, damagePoints = 4, manaPoints = 0, state) {
-      super(healthPoints, damagePoints, manaPoints, state);
+  constructor(healthPoints = 8, damagePoints = 4, manaPoints = 0, description, state, humanPlayer) {
+      super(healthPoints, damagePoints, manaPoints, state, humanPlayer);
+      this.description = "Le Berzerker est juste un gros bourrin avec une attaque élevée."
   }
   rage = () => {
     this.damagePoints++;
@@ -85,9 +91,10 @@ class Berzerker extends Character {
 }
 
 class Assassin extends Character {
-  constructor(healthPoints = 6, damagePoints = 6, manaPoints = 20, state, activatedAssassin = 0) {
-    super(healthPoints, damagePoints, manaPoints, state);
+  constructor(healthPoints = 6, damagePoints = 6, manaPoints = 20, description, state, activatedAssassin = 0, humanPlayer) {
+    super(healthPoints, damagePoints, manaPoints, state, humanPlayer);
     this.activatedAssassin = activatedAssassin;
+    this.description = "L'Assassin est rusé et fourbe, et fait ses attaques dans l'ombre."
   }
   shadowHit = (enemy) => {
     if(this.manaPoints>=20)
