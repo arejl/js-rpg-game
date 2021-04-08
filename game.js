@@ -37,5 +37,7 @@ class Game {
     });
     let characterChoice = prompt("Indiquez le numéro du personnage que vous souhaitez incarner pour cette partie :");
     Players[characterChoice - 1].humanPlayer = true;
+    console.log(`Vous serez donc un ${Players[characterChoice - 1].constructor.name}.`);
+    console.log("\n Le combat va commencer. Bonne chance à vous ! \n\n");
   }
 }

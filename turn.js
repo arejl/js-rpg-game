@@ -60,7 +60,7 @@ class Turn {
             else if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1)
             {
               enemy.healthPoints += 4;
-              player.healingLighting(enemy); 
+              player.healingLighting(enemy);
               console.log("L'assassin évite l'attaque grâce à son attaque spéciale !")
             }
             else { player.healingLighting(enemy); };
@@ -85,7 +85,7 @@ class Turn {
             else if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1)
             {
               enemy.healthPoints += 4;
-              player.fireBall(enemy); 
+              player.fireBall(enemy);
               console.log("L'assassin évite l'attaque grâce à son attaque spéciale !")
             }
             else { player.fireBall(enemy); };
@@ -115,14 +115,14 @@ class Turn {
     let enemy = this.chooseEnemy(player);
     if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1) {
       enemy.healthPoints += 7;
-      player.shadowHit(enemy); 
+      player.shadowHit(enemy);
       console.log("L'assassin évite l'attaque grâce à son attaque spéciale !")
     }
     else { player.shadowHit(enemy);}
   }
 
   roundGameplay = () => {
-    Players.forEach(player => { if (player.state == "playing") { this.chooseAttack(player) }; });
+    Players.forEach(player => { if (player.state == "playing" && player.humanPlayer == true) { this.chooseAttack(player) }; });
     Players.filter(player => player.constructor.name == "Fighter").map(player => player.activatedFighter = 0);
     Players.filter(player => player.constructor.name == "Assassin").map(player => player.activatedAssassin -= 1);
   }
