@@ -23,9 +23,9 @@ class Game {
   }
 
   static watchStats = () => {
-    Players.filter(player => player.state == "winner").forEach(player => console.log(`${player.constructor.name} a gagné !`));
-    Players.filter(player => player.state == "playing").forEach(player => console.log(`${player.constructor.name} a ${player.healthPoints} PV, ${player.manaPoints} points de Mana et ${player.damagePoints} points de dommage.`));
-    Players.filter(player => player.state == "loser").forEach(player => console.log(`${player.constructor.name} a perdu !`));
+    Players.filter(player => player.state == "winner").forEach(player => console.log(`${player.name} a gagné !`));
+    Players.filter(player => player.state == "playing").forEach(player => console.log(`${player.name} a ${player.healthPoints} PV, ${player.manaPoints} points de Mana et ${player.damagePoints} points de dommage.`));
+    Players.filter(player => player.state == "loser").forEach(player => console.log(`${player.name} a perdu !`));
     console.log("\n");
   }
 
@@ -35,11 +35,12 @@ class Game {
       console.log(`${Players.indexOf(player) + 1} - ${player.constructor.name}`);
       console.log(player.description);
     });
-    let characterChoice = prompt("Indiquez le numéro du personnage que vous souhaitez incarner pour cette partie :");
+    let characterChoice = prompt("Indique le numéro du personnage que tu souhaites incarner pour cette partie :");
     while (typeof(Players[Number(characterChoice)-1]) == "undefined") {
-      alert("Choisissez un joueur valide");
-      characterChoice = prompt("Indiquez le numéro du personnage que vous souhaitez incarner pour cette partie :");
+      alert("Choisis un joueur valide");
+      characterChoice = prompt("Indique le numéro du personnage que tu souhaites incarner pour cette partie :");
     }
     Players[Number(characterChoice) - 1].humanPlayer = true;
+    Players[Number(characterChoice) - 1].name = prompt("Comment t'appelles-tu ?")
   }
 }
