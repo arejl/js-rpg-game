@@ -42,7 +42,8 @@ class Turn {
         } else {
           let index = Players.indexOf(player);
           let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length);
-          enemy = Players[enemyChoice]
+          enemy = Players.filter(player => Players.indexOf(player) != index && player.state == "playing")[enemyChoice]
+          
         };
         if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1)
         {
@@ -63,7 +64,7 @@ class Turn {
             } else {
               let index = Players.indexOf(player);
               let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length);
-              enemy = Players[enemyChoice]
+              enemy = Players.filter(player => Players.indexOf(player) != index && player.state == "playing")[enemyChoice];
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
@@ -83,7 +84,7 @@ class Turn {
             } else {
               let index = Players.indexOf(player);
               let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length);
-              enemy = Players[enemyChoice]
+              enemy = Players.filter(player => Players.indexOf(player) != index && player.state == "playing")[enemyChoice]
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
@@ -114,7 +115,7 @@ class Turn {
             } else {
               let index = Players.indexOf(player);
               let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length);
-              enemy = Players[enemyChoice]
+              enemy = Players.filter(player => Players.indexOf(player) != index && player.state == "playing")[enemyChoice]
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
@@ -135,7 +136,7 @@ class Turn {
             } else {
               let index = Players.indexOf(player);
               let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length);
-              enemy = Players[enemyChoice]
+              enemy = Players.filter(player => Players.indexOf(player) != index && player.state == "playing")[enemyChoice]
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
