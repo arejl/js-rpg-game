@@ -10,6 +10,10 @@ class Turn {
     console.log("Voici les joueurs encore en jeu :");
     attackablePlayers.forEach(player => console.log(`${attackablePlayers.indexOf(player) + 1}. ${player.constructor.name} (${player.healthPoints} PV restants)`));
     let enemyChoice = prompt(`Qui veux-tu attaquer ?`);
+    while (typeof(attackablePlayers[Number(enemyChoice)-1]) == "undefined") {
+      alert("Choisis un joueur valide");
+      enemyChoice = prompt(`Qui veux-tu attaquer ?`);
+    }
     return attackablePlayers[Number(enemyChoice) - 1];
   }
 
@@ -21,6 +25,10 @@ class Turn {
     }
     else {
       let attackChoice = prompt("Choisis ton attaque : 1. attaque normale 2. attaque spéciale");
+      while (!["1", "2"].includes(attackChoice)) {
+        alert("Ecris 1 ou 2");
+        attackChoice = prompt("Choisis ton attaque : 1. attaque normale 2. attaque spéciale");
+      }
       if (Number(attackChoice) == 1) {
         enemy = this.chooseEnemy(player);
         if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1)
