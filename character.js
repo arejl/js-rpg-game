@@ -95,7 +95,8 @@ class Assassin extends Character {
     //The character will not take any damage next round.
     this.manaPoints -= 20;
     this.dealDamage(enemy, 7)
-    if (enemy.state == "playing") {
+      if (enemy.state == "playing") {
+      console.log(`${enemy.constructor.name} est toujours en vie !`)
       this.takeDamage(7);
       }
     }
