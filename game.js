@@ -13,6 +13,7 @@ class Game {
 
   newGame = () => {
     console.log("Bienvenue dans le Donjon de la Mort 💀");
+    console.log("\n");
     this.choosePlayableCharacter();
     while (this.turnsLeft > 0 && Players.filter(player => player.state == "playing").length > 1) {
       this.newTurn()
