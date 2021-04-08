@@ -96,7 +96,7 @@ class Assassin extends Character {
     this.manaPoints -= 20;
     this.dealDamage(enemy, 7)
     if (enemy.state == "playing") {
-      this.healthPoints -= 7;
+      this.takeDamage(7);
       }
     }
     else {console.log("Vous n'avez pas assez de points de mana")}
