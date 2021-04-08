@@ -1,14 +1,14 @@
 class Turn {
 
   startTurn = (round) => {
-    console.log(`Round numéro ${round}`);
+    console.log(`------ Round numéro ${round} ------`);
   }
 
   chooseEnemy = (player) => {
     let index = Players.indexOf(player);
     let attackablePlayers = Players.filter(player => Players.indexOf(player) != index && player.state == "playing");
     console.log("Voici les joueurs encore en jeu :");
-    attackablePlayers.forEach(player => console.log(`${attackablePlayers.indexOf(player) + 1} -- ${player.constructor.name} -- ${player.healthPoints} PV`));
+    attackablePlayers.forEach(player => console.log(`${attackablePlayers.indexOf(player) + 1}. ${player.constructor.name} (${player.healthPoints} PV restants)`));
     let enemyChoice = prompt(`Qui veux-tu attaquer ?`);
     return attackablePlayers[Number(enemyChoice) - 1];
   }
@@ -24,7 +24,10 @@ class Turn {
       if (Number(attackChoice) == 1) {
         enemy = this.chooseEnemy(player);
         if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1)
-          { player.dealDamage(enemy, player.damagePoints - 2) }
+        {
+          console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
+          player.dealDamage(enemy, player.damagePoints - 2)
+        }
         else if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1)
         {
           console.log("L'assassin évite l'attaque grâce à son attaque spéciale !")
@@ -37,6 +40,7 @@ class Turn {
             enemy = this.chooseEnemy(player);
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
+              console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
               player.darkVision(enemy);
             }
             else if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1) {
@@ -49,7 +53,8 @@ class Turn {
           case "Paladin":
             enemy = this.chooseEnemy(player);
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
-              enemy.healthPoints += 2
+              enemy.healthPoints += 2;
+              console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
               player.healingLighting(enemy);
             }
             else if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1)
@@ -69,6 +74,36 @@ class Turn {
           case "Assassin":
             player.activatedAssassin = 2;
             console.log("L'assassin prépare son attaque !");
+            break;
+          case "Wizard":
+            enemy = this.chooseEnemy(player);
+            if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
+              enemy.healthPoints += 2;
+              console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
+              player.fireBall(enemy);
+            }
+            else if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1)
+            {
+              enemy.healthPoints += 4;
+              player.fireBall(enemy); 
+              console.log("L'assassin évite l'attaque grâce à son attaque spéciale !")
+            }
+            else { player.fireBall(enemy); };
+            break;
+          case "Ogre":
+            enemy = this.chooseEnemy(player);
+            if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
+              enemy.healthPoints += 2;
+              console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
+              player.skullCrusher(enemy);
+            }
+            else if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1)
+            {
+              enemy.healthPoints += 4;
+              player.skullCrusher(enemy);
+              console.log("L'assassin évite l'attaque grâce à son attaque spéciale !")
+            }
+            else { player.skullCrusher(enemy); };
             break;
         }
       }
