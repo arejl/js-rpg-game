@@ -20,9 +20,19 @@ class Turn {
       this.assassinAttack(player);
     }
     else {
-      let attackChoice = prompt("Choisis ton attaque : 1. attaque normale 2. attaque spéciale");
+      let attackChoice = 0;
+      if(player.humanPlayer == true) {
+        attackChoice = prompt("Choisis ton attaque : 1. attaque normale 2. attaque spéciale");
+      } else {
+        attackChoice = Math.floor(Math.random() * 2 + 1);
+      };
       if (Number(attackChoice) == 1) {
-        enemy = this.chooseEnemy(player);
+        if (player.humanPlayer == true) {
+          enemy = this.chooseEnemy(player);
+        } else {
+          let enemyChoice = Math.floor(Math.random() * Players.filter(player => player.state = "playing").length)
+          enemy = Players[enemyChoice]
+        };
         if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1)
         {
           console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
@@ -37,7 +47,12 @@ class Turn {
       else if (Number(attackChoice) == 2) {
         switch (player.constructor.name) {
           case "Fighter":
-            enemy = this.chooseEnemy(player);
+            if (player.humanPlayer == true) {
+              enemy = this.chooseEnemy(player);
+            } else {
+              let enemyChoice = Math.floor(Math.random() * Players.filter(player => player.state = "playing").length)
+              enemy = Players[enemyChoice]
+            };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
               console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
@@ -51,7 +66,12 @@ class Turn {
             else { player.darkVision(enemy); };
             break;
           case "Paladin":
-            enemy = this.chooseEnemy(player);
+            if (player.humanPlayer == true) {
+              enemy = this.chooseEnemy(player);
+            } else {
+              let enemyChoice = Math.floor(Math.random() * Players.filter(player => player.state = "playing").length)
+              enemy = Players[enemyChoice]
+            };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
               console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
@@ -76,7 +96,12 @@ class Turn {
             console.log("L'assassin prépare son attaque !");
             break;
           case "Wizard":
-            enemy = this.chooseEnemy(player);
+            if (player.humanPlayer == true) {
+              enemy = this.chooseEnemy(player);
+            } else {
+              let enemyChoice = Math.floor(Math.random() * Players.filter(player => player.state = "playing").length)
+              enemy = Players[enemyChoice]
+            };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
               console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
@@ -91,7 +116,12 @@ class Turn {
             else { player.fireBall(enemy); };
             break;
           case "Ogre":
-            enemy = this.chooseEnemy(player);
+            if (player.humanPlayer == true) {
+              enemy = this.chooseEnemy(player);
+            } else {
+              let enemyChoice = Math.floor(Math.random() * Players.filter(player => player.state = "playing").length)
+              enemy = Players[enemyChoice]
+            };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
               console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
@@ -122,7 +152,10 @@ class Turn {
   }
 
   roundGameplay = () => {
-    Players.forEach(player => { if (player.state == "playing" && player.humanPlayer == true) { this.chooseAttack(player) }; });
+    Players.forEach(player => { if (player.state == "playing" && player.humanPlayer == true) {
+      this.chooseAttack(player) }; });
+    Players.forEach(player => { if (player.state == "playing" && player.humanPlayer == false) {
+      this.chooseAttack(player) }; });
     Players.filter(player => player.constructor.name == "Fighter").map(player => player.activatedFighter = 0);
     Players.filter(player => player.constructor.name == "Assassin").map(player => player.activatedAssassin -= 1);
   }
