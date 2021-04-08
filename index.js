@@ -13,7 +13,18 @@ Hornibus.name = "Hornibus";
 const Shrek = new Ogre();
 Shrek.name = "Shrek";
 
-const Players = [Grace, Ulder, Moana, Draven, Carl, Hornibus, Shrek];
+const definePlayers = (availablePlayers, n) => {
+  let chosenPlayers = [];
+  let randomIndex = 0;
+  for (let i = 0; i < n; i++) {
+    randomIndex = Math.floor(Math.random() * availablePlayers.length);
+    chosenPlayers.push(availablePlayers[randomIndex]);
+    availablePlayers.splice(randomIndex, 1);
+  }
+  return chosenPlayers;
+}
+
+const Players = definePlayers([Grace, Ulder, Moana, Draven, Carl, Hornibus, Shrek], 5)
 
 let currentTurn = new Turn();
 

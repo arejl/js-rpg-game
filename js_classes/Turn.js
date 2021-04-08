@@ -167,9 +167,7 @@ class Turn {
   }
 
   roundGameplay = () => {
-    Players.forEach(player => { if (player.state == "playing" && player.humanPlayer == true) {
-      this.chooseAttack(player) }; });
-    Players.forEach(player => { if (player.state == "playing" && player.humanPlayer == false) {
+    Players.forEach(player => { if (player.state == "playing") {
       this.chooseAttack(player) }; });
     Players.filter(player => player.constructor.name == "Fighter").map(player => player.activatedFighter = 0);
     Players.filter(player => player.constructor.name == "Assassin").map(player => player.activatedAssassin -= 1);
