@@ -41,7 +41,7 @@ class Turn {
           enemy = this.chooseEnemy(player);
         } else {
           let index = Players.indexOf(player);
-          let enemyChoice = Math.floor(Math.random() * Players.indexOf(player) != index && player.state == "playing").length)
+          let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length;
           enemy = Players[enemyChoice]
         };
         if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1)
@@ -62,7 +62,7 @@ class Turn {
               enemy = this.chooseEnemy(player);
             } else {
               let index = Players.indexOf(player);
-              let enemyChoice = Math.floor(Math.random() * Players.indexOf(player) != index && player.state == "playing").length)
+              let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length;
               enemy = Players[enemyChoice]
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
@@ -82,7 +82,7 @@ class Turn {
               enemy = this.chooseEnemy(player);
             } else {
               let index = Players.indexOf(player);
-              let enemyChoice = Math.floor(Math.random() * Players.indexOf(player) != index && player.state == "playing").length)
+              let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length;
               enemy = Players[enemyChoice]
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
@@ -113,7 +113,7 @@ class Turn {
               enemy = this.chooseEnemy(player);
             } else {
               let index = Players.indexOf(player);
-              let enemyChoice = Math.floor(Math.random() * Players.indexOf(player) != index && player.state == "playing").length)
+              let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length;
               enemy = Players[enemyChoice]
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
@@ -134,7 +134,7 @@ class Turn {
               enemy = this.chooseEnemy(player);
             } else {
               let index = Players.indexOf(player);
-              let enemyChoice = Math.floor(Math.random() * Players.indexOf(player) != index && player.state == "playing").length)
+              let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length;
               enemy = Players[enemyChoice]
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
