@@ -19,6 +19,8 @@ class Turn {
 
   chooseAttack = (player) => {
     let enemy = "";
+    let index = "";
+    let enemies = [];
     console.log(`${player.name}, à ton tour de jouer`);
     if (player.constructor.name == "Assassin" && player.activatedAssassin > 0) {
       this.assassinAttack(player);
@@ -40,10 +42,16 @@ class Turn {
         if (player.humanPlayer == true) {
           enemy = this.chooseEnemy(player);
         } else {
-          let index = Players.indexOf(player);
-          let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length);
-          enemy = Players.filter(player => Players.indexOf(player) != index && player.state == "playing")[enemyChoice]
-          
+          index = Players.indexOf(player);
+          enemies = Players.filter(player => Players.indexOf(player) != index && player.state == "playing");
+          enemies.sort((enemy1, enemy2) => {
+            return enemy1.healthPoints - enemy2.healthPoints
+          });
+          if(enemies.length > 1) {
+            enemy = enemies[Math.round(Math.random())];
+          } else {
+            enemy = enemies[0]
+          };
         };
         if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1)
         {
@@ -62,10 +70,17 @@ class Turn {
             if (player.humanPlayer == true) {
               enemy = this.chooseEnemy(player);
             } else {
-              let index = Players.indexOf(player);
-              let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length);
-              enemy = Players.filter(player => Players.indexOf(player) != index && player.state == "playing")[enemyChoice];
-            };
+              index = Players.indexOf(player);
+              enemies = Players.filter(player => Players.indexOf(player) != index && player.state == "playing");
+              enemies.sort((enemy1, enemy2) => {
+                return enemy1.healthPoints - enemy2.healthPoints
+              });
+              if(enemies.length > 1) {
+                enemy = enemies[Math.round(Math.random())];
+              } else {
+                enemy = enemies[0]
+              };
+          };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
               console.log(`${enemy.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
@@ -82,9 +97,16 @@ class Turn {
             if (player.humanPlayer == true) {
               enemy = this.chooseEnemy(player);
             } else {
-              let index = Players.indexOf(player);
-              let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length);
-              enemy = Players.filter(player => Players.indexOf(player) != index && player.state == "playing")[enemyChoice]
+              index = Players.indexOf(player);
+              enemies = Players.filter(player => Players.indexOf(player) != index && player.state == "playing");
+              enemies.sort((enemy1, enemy2) => {
+                return enemy1.healthPoints - enemy2.healthPoints
+              });
+              if(enemies.length > 1) {
+                enemy = enemies[Math.round(Math.random())];
+              } else {
+                enemy = enemies[0]
+              };
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
@@ -113,9 +135,16 @@ class Turn {
             if (player.humanPlayer == true) {
               enemy = this.chooseEnemy(player);
             } else {
-              let index = Players.indexOf(player);
-              let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length);
-              enemy = Players.filter(player => Players.indexOf(player) != index && player.state == "playing")[enemyChoice]
+              index = Players.indexOf(player);
+              enemies = Players.filter(player => Players.indexOf(player) != index && player.state == "playing");
+              enemies.sort((enemy1, enemy2) => {
+                return enemy1.healthPoints - enemy2.healthPoints
+              });
+              if(enemies.length > 1) {
+                enemy = enemies[Math.round(Math.random())];
+              } else {
+                enemy = enemies[0]
+              };
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
@@ -134,9 +163,16 @@ class Turn {
             if (player.humanPlayer == true) {
               enemy = this.chooseEnemy(player);
             } else {
-              let index = Players.indexOf(player);
-              let enemyChoice = Math.floor(Math.random() * Players.filter(player => Players.indexOf(player) != index && player.state == "playing").length);
-              enemy = Players.filter(player => Players.indexOf(player) != index && player.state == "playing")[enemyChoice]
+              index = Players.indexOf(player);
+              enemies = Players.filter(player => Players.indexOf(player) != index && player.state == "playing");
+              enemies.sort((enemy1, enemy2) => {
+                return enemy1.healthPoints - enemy2.healthPoints
+              });
+              if(enemies.length > 1) {
+                enemy = enemies[Math.round(Math.random())];
+              } else {
+                enemy = enemies[0]
+              };
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
@@ -158,7 +194,21 @@ class Turn {
 
   assassinAttack = (player) => {
     console.log("L'assassin lance son attaque spéciale !");
-    let enemy = this.chooseEnemy(player);
+    let enemy = "";
+    if (player.humanPlayer == true) {
+      enemy = this.chooseEnemy(player);
+    } else {
+      let index = Players.indexOf(player);
+      let enemies = Players.filter(player => Players.indexOf(player) != index && player.state == "playing");
+      enemies.sort((enemy1, enemy2) => {
+        return enemy1.healthPoints - enemy2.healthPoints
+      });
+      if(enemies.length > 1) {
+        enemy = enemies[Math.round(Math.random())];
+      } else {
+        enemy = enemies[0]
+      };
+    };
     if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1) {
       enemy.healthPoints += 7;
       player.shadowHit(enemy);
