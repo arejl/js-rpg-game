@@ -10,5 +10,5 @@
 ### The Dungeon of Death
 
 * The player is able to control 5 characters that will fight to the death, like gladiators. Each character will have its own characteristics, as well as a special attack each. Each turn, for each character, you will choose who to attack. The characters still alive at the end of 10 turns, or the last character standing, win the game!
-* As an added bonus feature, the player is able to control only one character, whose type they choose. The rest of the characters are animated by an AI-like script attacking at random.
+* As an added bonus feature, the player is able to control only one character, whose type they choose. The rest of the characters are animated by an AI-like script attacking one of the two players with the least Health Points with a randomly chosen attack.
 * Two additional characters were added: Wizard and Ogre.
