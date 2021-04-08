@@ -8,7 +8,7 @@ class Turn {
     let index = Players.indexOf(player);
     let attackablePlayers = Players.filter(player => Players.indexOf(player) != index && player.state == "playing");
     console.log("Voici les joueurs encore en jeu :");
-    attackablePlayers.forEach(player => console.log(`${attackablePlayers.indexOf(player) + 1}. ${player.constructor.name} (${player.healthPoints} PV restants)`));
+    attackablePlayers.forEach(player => console.log(`${attackablePlayers.indexOf(player) + 1}. ${player.name} (${player.constructor.name} avec ${player.healthPoints} PV restants)`));
     let enemyChoice = prompt(`Qui veux-tu attaquer ?`);
     while (typeof(attackablePlayers[Number(enemyChoice)-1]) == "undefined") {
       alert("Choisis un joueur valide");
@@ -19,7 +19,7 @@ class Turn {
 
   chooseAttack = (player) => {
     let enemy = "";
-    console.log(`${player.constructor.name}, à ton tour de jouer`);
+    console.log(`${player.name}, à ton tour de jouer`);
     if (player.constructor.name == "Assassin" && player.activatedAssassin > 0) {
       this.assassinAttack(player);
     }
@@ -45,7 +45,7 @@ class Turn {
         };
         if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1)
         {
-          console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
+          console.log(`${enemy.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
           player.dealDamage(enemy, player.damagePoints - 2)
         }
         else if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1)
@@ -65,7 +65,7 @@ class Turn {
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
-              console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
+              console.log(`${enemy.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
               player.darkVision(enemy);
             }
             else if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1) {
@@ -84,7 +84,7 @@ class Turn {
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
-              console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
+              console.log(`${enemy.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
               player.healingLighting(enemy);
             }
             else if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1)
@@ -114,7 +114,7 @@ class Turn {
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
-              console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
+              console.log(`${enemy.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
               player.fireBall(enemy);
             }
             else if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1)
@@ -134,7 +134,7 @@ class Turn {
             };
             if (enemy.constructor.name == "Fighter" && enemy.activatedFighter == 1) {
               enemy.healthPoints += 2;
-              console.log(`${enemy.constructor.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
+              console.log(`${enemy.name} esquive en partie l'attaque grâce à son attaque spéciale.`);
               player.skullCrusher(enemy);
             }
             else if (enemy.constructor.name == "Assassin" && enemy.activatedAssassin == 1)
